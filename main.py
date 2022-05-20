@@ -23,7 +23,7 @@
 
 
 # Imports
-import functions as f
+import functions as fn
 import logging
 
 # from utils import setup_logging
@@ -35,7 +35,6 @@ Usage:
     python examples/send_message.py api_id api_hash phone chat_id text
 """
 
-### TODO: Import Telegram Module!
 if __name__ == '__main__':
     # setup_logging(level=logging.INFO)
 
@@ -52,12 +51,21 @@ if __name__ == '__main__':
     tg.login()
 
     def new_message_handler(update):
+
+        # Grab the most recent message in the chat.
         message_content = update['message']['content']
-        message_text = message_content.get('text', {}).get('text', '').lower()
+        message_text = message_content['text']['text']
+
+        # Grab the sender's ID
+        sender_user_id = update['message']['sender']['user_id']
+        print(f'ID of last message sender: {sender_user_id}')
 
         if message_content['@type'] == 'messageText' and message_text == 'ping':
-            chat_id = update['message']['chat_id']
-            print(f'Ping has been received from {chat_id}')
+
+            # Make the AI seem more human with a delay.
+            fn.delay_response()
+
+            # Send a message to the chat.
             tg.send_message(
                 chat_id=chat_id,
                 text='pong',
