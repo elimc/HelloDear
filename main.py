@@ -7,6 +7,9 @@
 #
 # The admin's API info is located here. Your's will be different:
 # https://my.telegram.org/apps
+
+# Installation of packages:
+# https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/
 #
 # We use the following as a jump off point for our pretrained AI
 # https://www.thepythoncode.com/article/conversational-ai-chatbot-with-huggingface-transformers-in-python
@@ -19,7 +22,7 @@
 
 
 # Imports
-import functions as fn
+import functions as f
 
 if __name__ == '__main__':
     pass
