@@ -24,6 +24,55 @@
 
 # Imports
 import functions as f
+import logging
 
+# from utils import setup_logging
+from telegram.client import Telegram
+
+"""
+Sends a message to a chat
+Usage:
+    python examples/send_message.py api_id api_hash phone chat_id text
+"""
+
+### TODO: Import Telegram Module!
 if __name__ == '__main__':
-    pass
+    # setup_logging(level=logging.INFO)
+
+    output = "pong"
+    chat_id = 777000
+
+    tg = Telegram(
+        api_id='15928630',
+        api_hash='0c6e608215ac598f07d44532bcae88d0',
+        phone='+15092058617',
+        database_encryption_key='changeme1234',
+    )
+    # you must call login method before others
+    tg.login()
+
+    # if this is the first run, library needs to preload all chats
+    # otherwise the message will not be sent
+    result = tg.get_chats()
+
+    # `tdlib` is asynchronous, so `python-telegram` always returns you an `AsyncResult` object.
+    # You can wait for a result with the blocking `wait` method.
+    result.wait()
+
+    if result.error:
+        print(f'get chats error: {result.error_info}')
+    else:
+        print(f'chats: {result.update}')
+
+    result = tg.send_message(
+        chat_id=chat_id,
+        text=output,
+    )
+
+    result.wait()
+    if result.error:
+        print(f'send message error: {result.error_info}')
+    else:
+        print(f'message has been sent: {result.update}')
+
+    tg.stop()

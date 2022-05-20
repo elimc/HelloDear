@@ -1,0 +1,2 @@
+python-telegram==0.15.0
+setuptools==62.3.2
