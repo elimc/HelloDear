@@ -49,7 +49,7 @@ import { inject, ref } from "vue";
 import CardWidget from "../components/Card.vue";
 
 export default {
-  name: "Home",
+  name: "Configuration",
   setup() {
     const title = ref("Configuration");
     const state = inject("state");
