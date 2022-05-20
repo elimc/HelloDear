@@ -27,35 +27,36 @@ For Mac/Unix:
 ```sh
 python3 -m pip install --user virtualenv
 python3 -m venv env
-python3 -m pip install -r requirements.txt
+source env/bin/activate
+pip install -r requirements.txt
+deactivate
 ```
 
 For Windows:
 ```sh
 py -m pip install --user virtualenv
 py -m venv env
-py -m pip install -r requirements.txt
-```
-5) You are done installing the project and it's dependencies. We can deactivate now:
-For both Mac/Unix and Windows:
-```sh
+.\env\Scripts\activate
+pip install -r requirements.txt
 deactivate
 ```
+5) You are done installing the project and it's dependencies. We can deactivate now:
 
 ### Working in your project
-You will need to ensure you project is activated.
+You will need to ensure you project is activated. This will allow python libraries to be run locally instead of globally.
 For Mac/Unix:
 ```sh
-python3 -m pip install -r requirements.txt
+source env/bin/activate
+which python
 ```
 
 For Windows:
-For Mac/Unix:
 ```sh
-python3 -m pip install -r requirements.txt
+.\env\Scripts\activate
+where python
 ```
 
-To deactivate your venv:
+To deactivate your venv for both Mac/Unix and Windows:
 ```sh
 deactivate
 ```

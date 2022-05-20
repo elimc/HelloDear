@@ -7,9 +7,10 @@
 #
 # The admin's API info is located here. Your's will be different:
 # https://my.telegram.org/apps
-
+# 
 # Installation of packages:
 # https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/
+# https://note.nkmk.me/en/python-pip-install-requirements/
 #
 # We use the following as a jump off point for our pretrained AI
 # https://www.thepythoncode.com/article/conversational-ai-chatbot-with-huggingface-transformers-in-python
