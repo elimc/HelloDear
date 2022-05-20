@@ -1,9 +1,14 @@
-<script setup>
-import TheWelcome from '@/components/TheWelcome.vue'
-</script>
-
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  <div class="home">
+    <h1>This is a home page</h1>
+  </div>
 </template>
+
+<script>
+export default {
+  name: "Home",
+  setup() {
+
+  }
+}
+</script>
