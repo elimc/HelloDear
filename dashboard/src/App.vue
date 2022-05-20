@@ -17,6 +17,10 @@ export default {
         route: "/home"
       },
       {
+        name: "Configuration",
+        route: "/config"
+      },
+      {
         name: "About",
         route: "/about"
       },
@@ -27,7 +31,7 @@ export default {
     // This is not really a good way to manage state, 
     // but there's not much time to set up a proper store
     const state = ref({
-      test: "test key"
+      messageID: "test"
     })
 
     // Provide global state so it available in any components if required
