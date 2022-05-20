@@ -38,6 +38,7 @@ if __name__ == '__main__':
         phone='+15092058617',
         database_encryption_key='changeme1234',
     )
+
     # you must call login method before others
     tg.login()
 
@@ -60,16 +61,24 @@ if __name__ == '__main__':
         sender_user_id = update['message']['sender']['user_id']
         print(f'ID of last message sender: {sender_user_id}')
 
-        if message_content['@type'] == 'messageText' and message_text == 'ping':
+        if message_content['@type'] == 'messageText' and message_text == 'ping' and sender_user_id == my_id:
 
             # Make the AI seem more human with a delay.
             # fn.delay_response(0, 20)
 
             # Send a message to the chat.
-            tg.send_message(
+            result = tg.send_message(
                 chat_id=chat_id,
                 text='pong',
             )
 
+            result.wait()
+            if result.error:
+                print(f'send message error: {result.error_info}')
+            else:
+                print(f'message has been sent: {result.update}')
+
+    # Set up the new message handler.
+    # Set off a script anytime a new message is received.
     tg.add_message_handler(new_message_handler)
     tg.idle()  # blocking waiting for CTRL+C
