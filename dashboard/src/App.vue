@@ -1,6 +1,6 @@
 <template>
   <tabs-vue :tabs="tabs">
-    <router-view></router-view>
+    <router-view class="p-10"></router-view>
   </tabs-vue>
 </template>
 
