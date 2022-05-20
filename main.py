@@ -24,16 +24,12 @@
 
 # Imports
 import functions as fn
-import logging
+# import logging
 
 # from utils import setup_logging
 from telegram.client import Telegram
 
-"""
-Sends a message to a chat
-Usage:
-    python examples/send_message.py api_id api_hash phone chat_id text
-"""
+
 
 if __name__ == '__main__':
     # setup_logging(level=logging.INFO)
@@ -63,7 +59,7 @@ if __name__ == '__main__':
         if message_content['@type'] == 'messageText' and message_text == 'ping':
 
             # Make the AI seem more human with a delay.
-            fn.delay_response()
+            # fn.delay_response()
 
             # Send a message to the chat.
             tg.send_message(
