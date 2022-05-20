@@ -25,28 +25,14 @@
         "
       />
     </div>
-    <button
-      class="
-        self-end
-        mt-10
-        px-5
-        py-2
-        bg-blue-500
-        font-semibold
-        rounded-lg
-        hover:scale-105
-        transition-all
-      "
-      @click="submit"
-    >
-      Save
-    </button>
+    <save-button>Save</save-button>
   </card-widget>
 </template>
 
 <script>
 import { inject, ref } from "vue";
 import CardWidget from "../components/Card.vue";
+import SaveButton from '../components/SaveButton.vue';
 
 export default {
   name: "Configuration",
@@ -70,6 +56,6 @@ export default {
     };
     return { title, state, fields, submit };
   },
-  components: { CardWidget },
+  components: { CardWidget, SaveButton },
 };
 </script>
