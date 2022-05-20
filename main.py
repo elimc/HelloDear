@@ -41,13 +41,16 @@ if __name__ == '__main__':
     # you must call login method before others
     tg.login()
 
-    # Grab scammers ID
+    # Grab scammers ID or return False
     scammer_id = ui.get_scammer_info(tg, '5395841799')
 
-    # Grab my ID
+    # Grab my ID or return False
     my_id = ui.get_my_info(tg)
 
     def new_message_handler(update):
+        """
+        This is the main function that handles new messages.
+        """
 
         # Grab the most recent message in the chat.
         message_content = update['message']['content']
@@ -60,7 +63,7 @@ if __name__ == '__main__':
         if message_content['@type'] == 'messageText' and message_text == 'ping':
 
             # Make the AI seem more human with a delay.
-            # fn.delay_response()
+            # fn.delay_response(0, 20)
 
             # Send a message to the chat.
             tg.send_message(
