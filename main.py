@@ -51,28 +51,17 @@ if __name__ == '__main__':
     # you must call login method before others
     tg.login()
 
-    # if this is the first run, library needs to preload all chats
-    # otherwise the message will not be sent
-    result = tg.get_chats()
+    def new_message_handler(update):
+        message_content = update['message']['content']
+        message_text = message_content.get('text', {}).get('text', '').lower()
 
-    # `tdlib` is asynchronous, so `python-telegram` always returns you an `AsyncResult` object.
-    # You can wait for a result with the blocking `wait` method.
-    result.wait()
+        if message_content['@type'] == 'messageText' and message_text == 'ping':
+            chat_id = update['message']['chat_id']
+            print(f'Ping has been received from {chat_id}')
+            tg.send_message(
+                chat_id=chat_id,
+                text='pong',
+            )
 
-    if result.error:
-        print(f'get chats error: {result.error_info}')
-    else:
-        print(f'chats: {result.update}')
-
-    result = tg.send_message(
-        chat_id=chat_id,
-        text=output,
-    )
-
-    result.wait()
-    if result.error:
-        print(f'send message error: {result.error_info}')
-    else:
-        print(f'message has been sent: {result.update}')
-
-    tg.stop()
+    tg.add_message_handler(new_message_handler)
+    tg.idle()  # blocking waiting for CTRL+C
