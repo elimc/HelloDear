@@ -7,7 +7,7 @@
 #
 # The admin's API info is located here. Your's will be different:
 # https://my.telegram.org/apps
-# 
+#
 # Installation of packages:
 # https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/
 # https://note.nkmk.me/en/python-pip-install-requirements/
@@ -23,16 +23,11 @@
 
 
 # Imports
-import functions as fn
-# import logging
-
-# from utils import setup_logging
 from telegram.client import Telegram
-
-
+import functions as fn
+import user_info as ui
 
 if __name__ == '__main__':
-    # setup_logging(level=logging.INFO)
 
     output = "pong"
     chat_id = 777000
@@ -45,6 +40,12 @@ if __name__ == '__main__':
     )
     # you must call login method before others
     tg.login()
+
+    # Grab scammers ID
+    scammer_id = ui.get_scammer_info(tg, '5395841799')
+
+    # Grab my ID
+    my_id = ui.get_my_info(tg)
 
     def new_message_handler(update):
 
