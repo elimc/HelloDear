@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { ref } from "vue"
+import { provide, ref, watch } from "vue"
 import TabsVue from './components/Tabs.vue'
 
 export default {
@@ -22,6 +22,21 @@ export default {
       },
 
     ])
+
+    // Very simple global state object. 
+    // This is not really a good way to manage state, 
+    // but there's not much time to set up a proper store
+    const state = ref({
+      test: "test key"
+    })
+
+    // Provide global state so it available in any components if required
+    provide('state', state)
+
+    // Watch for updates in the state
+    watch(state, (curr, prev) => {
+      console.log("State updated", state.value)
+    }, { deep: true })
 
     return {
       tabs
