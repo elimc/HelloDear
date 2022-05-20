@@ -75,8 +75,8 @@ if __name__ == '__main__':
             result.wait()
             if result.error:
                 print(f'send message error: {result.error_info}')
-            else:
-                print(f'message has been sent: {result.update}')
+            # else:
+            #     print(f'message has been sent: {result.update}')
 
     # Set up the new message handler.
     # Set off a script anytime a new message is received.
