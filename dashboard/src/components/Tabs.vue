@@ -8,7 +8,7 @@
         </router-link>
       </li>
     </ul>
-    <div>
+    <div class="w-full max-w-5xl">
       <slot></slot>
     </div>
   </div>
