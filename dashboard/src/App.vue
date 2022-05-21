@@ -1,12 +1,16 @@
 <template>
   <tabs-vue :tabs="tabs">
-    <router-view class="p-10"></router-view>
+    <router-view v-slot="{ Component }" class="p-10">
+      <keep-alive>
+        <component :is="Component" />
+      </keep-alive>
+    </router-view>
   </tabs-vue>
 </template>
 
 <script>
-import { provide, ref, watch } from "vue"
-import TabsVue from './components/Tabs.vue'
+import { provide, ref, watch } from "vue";
+import TabsVue from "./components/Tabs.vue";
 
 export default {
   components: { TabsVue },
@@ -14,37 +18,45 @@ export default {
     const tabs = ref([
       {
         name: "Home",
-        route: "/home"
+        route: "/home",
       },
       {
-        name: "Configuration",
-        route: "/config"
+        name: "Config",
+        route: "/config",
+      },
+      {
+        name: "Faces",
+        route: "/faces",
       },
       {
         name: "About",
-        route: "/about"
+        route: "/about",
       },
+    ]);
 
-    ])
-
-    // Very simple global state object. 
-    // This is not really a good way to manage state, 
+    // Very simple global state object.
+    // This is not really a good way to manage state,
     // but there's not much time to set up a proper store
     const state = ref({
-      messageID: "test"
-    })
+      messageID: "test",
+      face: ""
+    });
 
     // Provide global state so it available in any components if required
-    provide('state', state)
+    provide("state", state);
 
     // Watch for updates in the state
-    watch(state, (curr, prev) => {
-      console.log("State updated", state.value)
-    }, { deep: true })
+    watch(
+      state,
+      (curr, prev) => {
+        console.log("State updated", state.value);
+      },
+      { deep: true }
+    );
 
     return {
-      tabs
-    }
-  }
-}
+      tabs,
+    };
+  },
+};
 </script>
