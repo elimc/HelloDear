@@ -13,8 +13,12 @@ const router = createRouter({
       path: '/config',
       name: 'configuration',
       component: () => import('../views/ConfigurationView.vue')
+    }, 
+    {
+      path: '/faces',
+      name: 'faces',
+      component: () => import('../views/FacesView.vue')
     },
-    
     {
       path: '/about',
       name: 'about',
