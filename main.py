@@ -38,7 +38,10 @@ if __name__ == '__main__':
         config = {str(key, "utf-8"): str(db.get(key), "utf-8")
                   for key in db.keys()}
 
-    pprint(object=config, indent=4)
+    # pprint(config["messageID"])
+
+    # For Eli local chat.
+    chat_id = int(config["messageID"])
 
     # Choose size of pretrained model
     MODEL_NAME = "microsoft/DialoGPT-large"
@@ -49,8 +52,7 @@ if __name__ == '__main__':
     tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
     model = AutoModelForCausalLM.from_pretrained(MODEL_NAME)
 
-    # For Eli local chat.
-    chat_id = 777000
+
 
     tg = Telegram(
         api_id='15928630',
