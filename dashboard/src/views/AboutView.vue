@@ -1,15 +1,29 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <card-widget :title="title">
+    <h3 class="text-xl text-slate-500 leading-loose">
+      HelloDear is an open-source AI built for the 2022 Austin Community College
+      RiverHacks hackathon. Designed to combat the multi-billion dollar romance
+      scam industry, HelloDear wastes as much of a scammer's time as possible,
+      by pretending to be interested, leading them on as long as possible. Every
+      minute they spend talking to HelloDear is a minute not scamming a real
+      person, and we aim to increase this as high as we can, so as to reduce
+      scammers' success rates as much as possible.
+    </h3>
+  </card-widget>
 </template>
 
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-}
-</style>
+<script>
+import { inject, ref } from "vue";
+import CardWidget from "../components/Card.vue";
+
+export default {
+  name: "About",
+  setup() {
+    const title = ref("About");
+    const state = inject("state");
+
+    return { title, state };
+  },
+  components: { CardWidget },
+};
+</script>
