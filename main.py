@@ -40,8 +40,9 @@ if __name__ == '__main__':
 
     # pprint(config["messageID"])
 
-    # For Eli local chat.
-    chat_id = int(config["messageID"])
+    # Grab chat ID from the frontend
+    chat_id = int(config['messageID'])
+    # ai_base64_face_image = config['face']
 
     # Choose size of pretrained model
     MODEL_NAME = "microsoft/DialoGPT-large"
@@ -51,7 +52,6 @@ if __name__ == '__main__':
     # Set up conversationalai model
     tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
     model = AutoModelForCausalLM.from_pretrained(MODEL_NAME)
-
 
 
     tg = Telegram(
@@ -96,6 +96,14 @@ if __name__ == '__main__':
 
                 # If the last message was from me, then we need to respond.
                 message_text = message_content['text']['text']
+
+                # if message_text == 'Send me a photo':
+                    
+                #     # Send an AI generated photo to the chat.
+                #     result = tg.send_message(
+                #         chat_id=chat_id,
+                #         text=ai_base64_face_image,
+                #     )
 
                 # encode the input and add end of string token
                 input_ids = tokenizer.encode(
