@@ -1,5 +1,8 @@
 <template>
   <card-widget :title="title">
+    <h3 class="text-xl text-slate-500 leading-loose mb-7">
+      Explanation on how the configuration works.
+    </h3>
     <div v-for="field in fields" :key="field.key" class="mb-5">
       <label class="pr-3 uppercase font-bold" :for="field.label">
         {{ field.label }}
@@ -32,7 +35,7 @@
 <script>
 import { inject, ref } from "vue";
 import CardWidget from "../components/Card.vue";
-import ButtonWidget from '../components/Button.vue';
+import ButtonWidget from "../components/Button.vue";
 
 export default {
   name: "Configuration",
@@ -49,7 +52,7 @@ export default {
     ]);
     const submit = () => {
       fields.value.forEach(({ key, value }) => {
-        if(value) {
+        if (value) {
           state.value[key] = value;
         }
       });
