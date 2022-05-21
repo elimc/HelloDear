@@ -25,6 +25,7 @@
 # Imports
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
+from pprint import pprint
 from telegram.client import Telegram
 import functions as fn
 import user_info as ui
@@ -66,37 +67,62 @@ if __name__ == '__main__':
 
         # Grab the most recent message in the chat.
         message_content = update['message']['content']
-        message_text = message_content['text']['text']
+        pprint(message_content)
 
-        # Grab the sender's ID
+        # Is it the scammer or me who sent last messae?
         sender_user_id = update['message']['sender']['user_id']
         print(f'ID of last message sender: {sender_user_id}')
 
-        if message_content['@type'] == 'messageText' and sender_user_id == my_id:
+        # Did we receive text?
+        if message_content['@type'] == 'messageText':
 
-            # encode the input and add end of string token
-            input_ids = tokenizer.encode(
-                message_text + tokenizer.eos_token, return_tensors="pt")
-            # concatenate new user input with chat history (if there is)
-            # bot_input_ids = torch.cat([chat_history_ids, input_ids], dim=-1) if step > 0 else input_ids
-            bot_input_ids = input_ids
+            # Figure out if the last message was from the scammer or me.
+            if message_content['text']['@type'] == 'formattedText' and sender_user_id == my_id:
 
-            chat_history_ids = model.generate(
-                bot_input_ids,
-                max_length=1000,
-                do_sample=True,
-                top_p=0.95,
-                top_k=0,
-                temperature=0.75,
-                pad_token_id=tokenizer.eos_token_id
-            )
+                # If the last message was from me, then we need to respond.
+                message_text = message_content['text']['text']
 
-            output = tokenizer.decode(
-                chat_history_ids[:, bot_input_ids.shape[-1]:][0], skip_special_tokens=True)
-            print(f'This is the output: {output}')
+                # encode the input and add end of string token
+                input_ids = tokenizer.encode(
+                    message_text + tokenizer.eos_token, return_tensors="pt")
+                # concatenate new user input with chat history (if there is)
+                # bot_input_ids = torch.cat([chat_history_ids, input_ids], dim=-1) if step > 0 else input_ids
+                bot_input_ids = input_ids
 
-            # Make the AI seem more human with a delay.
-            # fn.delay_response(0, 20)
+                chat_history_ids = model.generate(
+                    bot_input_ids,
+                    max_length=1000,
+                    do_sample=True,
+                    top_p=0.95,
+                    top_k=0,
+                    temperature=0.75,
+                    pad_token_id=tokenizer.eos_token_id
+                )
+
+                output = tokenizer.decode(
+                    chat_history_ids[:, bot_input_ids.shape[-1]:][0], skip_special_tokens=True)
+                print(f'This is the output: {output}')
+
+                # Make the AI seem more human with a delay.
+                # fn.delay_response(0, 20)
+
+                # Send a message to the chat.
+                result = tg.send_message(
+                    chat_id=chat_id,
+                    text=output,
+                )
+
+                result.wait()
+                if result.error:
+                    print(f'send message error: {result.error_info}')
+                # else:
+                #     print(f'message has been sent: {result.update}')
+            else:
+                print('This is not a message from me. Or it is something other than text.')
+
+        else:
+            # A smile is a good default for the scammer.
+            output = ':)'
 
             # Send a message to the chat.
             result = tg.send_message(
@@ -107,10 +133,7 @@ if __name__ == '__main__':
             result.wait()
             if result.error:
                 print(f'send message error: {result.error_info}')
-            # else:
-            #     print(f'message has been sent: {result.update}')
-        else:
-            print('This is not a message from me. Or it is something other than text.')
+
 
     # Set up the new message handler.
     # Set off a script anytime a new message is received.
