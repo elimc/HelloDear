@@ -1,6 +1,6 @@
 <template>
   <tabs-vue :tabs="tabs">
-    <router-view v-slot="{ Component }" class="p-10">
+    <router-view v-slot="{ Component }" class="p-5 sm:p-10">
       <keep-alive>
         <component :is="Component" />
       </keep-alive>
