@@ -1,5 +1,6 @@
 <template>
   <div>
+    <nav-bar></nav-bar>
     <tabs-vue :tabs="tabs">
       <router-view v-slot="{ Component }" class="px-5 sm:px-10">
         <keep-alive>
@@ -12,10 +13,11 @@
 
 <script>
 import { provide, ref, watch } from "vue";
+import NavBar from "./components/NavBar.vue";
 import TabsVue from "./components/Tabs.vue";
 
 export default {
-  components: { TabsVue },
+  components: { TabsVue, NavBar },
   setup() {
     const tabs = ref([
       {
@@ -41,7 +43,7 @@ export default {
     // but there's not much time to set up a proper store
     const state = ref({
       messageID: "test",
-      face: ""
+      face: "",
     });
 
     // Provide global state so it available in any components if required
