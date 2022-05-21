@@ -21,7 +21,7 @@
 #
 ###############################################################################
 
-
+``
 # Imports
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
@@ -70,7 +70,7 @@ if __name__ == '__main__':
 
     # Print status of program.
     print()
-    print("Successfully logged in to Telegram! Waiting for messages...")
+    print('Successfully logged in to Telegram! Waiting for messages...', '/n')
 
     def new_message_handler(update):
         """
