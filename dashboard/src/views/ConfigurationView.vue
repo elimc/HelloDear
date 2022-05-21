@@ -28,7 +28,7 @@
         "
       />
     </div>
-    <button-widget class="bg-blue-400">Save</button-widget>
+    <button-widget class="bg-blue-400" @click="submit">Save</button-widget>
   </card-widget>
 </template>
 
