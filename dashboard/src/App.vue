@@ -1,11 +1,13 @@
 <template>
-  <tabs-vue :tabs="tabs">
-    <router-view v-slot="{ Component }" class="p-5 sm:p-10">
-      <keep-alive>
-        <component :is="Component" />
-      </keep-alive>
-    </router-view>
-  </tabs-vue>
+  <div>
+    <tabs-vue :tabs="tabs">
+      <router-view v-slot="{ Component }" class="px-5 sm:px-10">
+        <keep-alive>
+          <component :is="Component" />
+        </keep-alive>
+      </router-view>
+    </tabs-vue>
+  </div>
 </template>
 
 <script>

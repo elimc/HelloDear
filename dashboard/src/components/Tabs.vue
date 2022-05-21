@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-start flex-col md:flex-row">
-    <details class="pl-0 mr-4 mt-10">
+    <details class="pl-0 mr-4">
       <summary
         class="        
           font-medium
