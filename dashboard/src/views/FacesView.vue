@@ -104,7 +104,7 @@ export default {
     const title = ref("Faces");
     const state = inject("state");
 
-    const image = ref(state.face);
+    const image = ref(state.value.face);
     const loading = ref(true);
 
     const gender = ref();
@@ -126,6 +126,8 @@ export default {
     // Load image initially if none in state.
     if (!image.value) {
       slowFetch();
+    } else {
+      loading.value = false;
     }
 
     // Watch for changes in gender, minAge, or maxAge and update image accordingly
