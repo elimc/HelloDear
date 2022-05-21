@@ -13,7 +13,7 @@
       items-center
     "
   >
-    <p class="px-10 text-xl">{{ loadingText }}</p>
+    <p class="px-5 text-sm sm:px-10 sm:text-xl">{{ loadingText }}</p>
   </div>
   <img
     v-else-if="image"
