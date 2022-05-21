@@ -6,7 +6,7 @@
       scam industry, HelloDear wastes as much of a scammer's time as possible,
       by pretending to be interested, leading them on as long as possible. Every
       minute they spend talking to HelloDear is a minute not scamming a real
-      person, and we aim to increase this as high as we can, so as to reduce
+      person, and we aim to raise this as high as we can, so as to reduce
       scammers' success rates as much as possible.
     </h3>
   </card-widget>
