@@ -1,14 +1,52 @@
 <template>
-  <div class="flex items-start">
-    <ul class="flex flex-col flex-wrap list-none border-b-0 pl-0 mr-4">
-      <!-- <li>{{ currRoute.path }} - {{ tab.route }}</li> -->
-      <li v-for="tab in tabs" :key="tab.name" class="flex-grow text-center">
-        <router-link :to="tab.route" :class="{ 'bg-blue-300': isTabSelected(tab) }"
-          class="block font-medium text-xl px-6 py-3 my-2 hover:bg-gray-100">
-          {{ tab.name }}
-        </router-link>
-      </li>
-    </ul>
+  <div class="flex items-start flex-col md:flex-row">
+    <details class="pl-0 mr-4 mt-10">
+      <summary
+        class="        
+          font-medium
+          text-xl
+          w-screen
+          sm:w-auto
+          pl-32
+          pr-7
+          py-3
+          my-2
+          text-right
+          rounded-r-full
+          bg-slate-300
+          hover:bg-slate-200
+        "
+      >
+        Menu
+      </summary>
+      <ul class="flex flex-col flex-wrap list-none">
+        <li v-for="tab in tabs" :key="tab.name" class="flex-grow text-center">
+          <router-link
+            :to="tab.route"
+            :class="{
+              'bg-blue-300': isTabSelected(tab),
+              'hover:bg-blue-200': isTabSelected(tab),
+            }"
+            class="
+              block
+              font-medium
+              text-xl
+              w-screen
+              sm:w-auto
+              pl-32
+              pr-7
+              py-3
+              my-2
+              text-right
+              rounded-r-full
+              hover:bg-gray-100
+            "
+          >
+            {{ tab.name }}
+          </router-link>
+        </li>
+      </ul>
+    </details>
     <div class="w-full max-w-5xl">
       <slot></slot>
     </div>
@@ -16,7 +54,7 @@
 </template>
 
 <script>
-import { useRoute } from 'vue-router'
+import { useRoute } from "vue-router";
 
 export default {
   name: "Tabs",
@@ -25,18 +63,18 @@ export default {
     const isTabSelected = (tab) => {
       const tabName = String(tab.name).toLowerCase();
       const currName = String(currRoute.name).toLowerCase();
-      console.log(tab.name, currRoute.name)
-      
+      console.log(tab.name, currRoute.name);
+
       return tabName == currName;
-    }
-   
-    return { currRoute, isTabSelected }
+    };
+
+    return { currRoute, isTabSelected };
   },
   props: {
     tabs: {
       type: Array,
-      required: true
-    }
-  }
-}
+      required: true,
+    },
+  },
+};
 </script>
