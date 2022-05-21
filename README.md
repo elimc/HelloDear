@@ -60,3 +60,18 @@ To deactivate your venv for both Mac/Unix and Windows:
 ```sh
 deactivate
 ```
+
+### Dashboard Setup
+1. Build the dashboard. Run (in the dashboard directory)
+    ```
+    npm install
+    npm run build
+    ```
+2. Serve the API
+    ```
+    waitress-serve --port=8000 --host=localhost api.app:app
+    ```
+3. Serve the Dashboard
+    ```
+    py serve_dashboard.py
+    ```
