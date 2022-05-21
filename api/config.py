@@ -13,5 +13,8 @@ class Store:
     def on_post(self, req, resp):
         with dbm.open("hellodear", "c") as db:
             config = req.media
-            db.update(config)
+            
+            for key in config:
+              db[key] = config[key]
+
             resp.status = falcon.HTTP_200
