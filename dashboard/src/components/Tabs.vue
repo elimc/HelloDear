@@ -26,6 +26,7 @@
             :class="{
               'bg-blue-300': isTabSelected(tab),
               'hover:bg-blue-200': isTabSelected(tab),
+              'hover:bg-gray-200': !isTabSelected(tab)
             }"
             class="
               block
@@ -38,8 +39,7 @@
               py-3
               my-2
               text-right
-              rounded-r-full
-              hover:bg-gray-100
+              rounded-r-full              
             "
           >
             {{ tab.name }}
