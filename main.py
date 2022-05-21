@@ -65,7 +65,7 @@ if __name__ == '__main__':
     tg.login()
 
     # Grab scammers ID or return False
-    scammer_id = ui.get_scammer_info(tg, '5395841799')
+    scammer_id = ui.get_scammer_info(tg, chat_id)
 
     # Grab my ID or return False
     my_id = ui.get_my_info(tg)
@@ -92,7 +92,7 @@ if __name__ == '__main__':
         if message_content['@type'] == 'messageText':
 
             # Figure out if the last message was from the scammer or me.
-            if message_content['text']['@type'] == 'formattedText' and sender_user_id == my_id:
+            if message_content['text']['@type'] == 'formattedText' and sender_user_id != my_id:
 
                 # If the last message was from me, then we need to respond.
                 message_text = message_content['text']['text']
