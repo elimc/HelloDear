@@ -70,7 +70,8 @@ if __name__ == '__main__':
 
     # Print status of program.
     print()
-    print('Successfully logged in to Telegram! Waiting for messages...', '/n')
+    print('Successfully logged in to Telegram! Waiting for messages...')
+    print()
 
     def new_message_handler(update):
         """
