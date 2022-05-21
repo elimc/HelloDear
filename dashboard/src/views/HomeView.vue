@@ -1,16 +1,16 @@
 <template>
   <card-widget :title="title">
     <div class="mt-10 grid grid-cols-1 gap-12">
-      <div class="flex justify-between gap-12 p-10 bg-slate-200 rounded-3xl">
+      <div class="flex flex-col xl:flex-row justify-between gap-12 p-5 sm:p-10 bg-slate-200 rounded-3xl">
         <div>
           <h2 class="text-2xl font-bold mb-3">Status</h2>
-          <p class="text-xl leading-relaxed">
+          <p class="text-xl leading-relaxed self-center xl:self-end">
             Here, you can view the status of the AI.
           </p>
         </div>
         <div>Currently unimplemented: Status widget</div>
       </div>
-      <div class="flex justify-between gap-12 p-10 bg-slate-200 rounded-3xl">
+      <div class="flex flex-col xl:flex-row justify-between gap-12 p-5 sm:p-10 bg-slate-200 rounded-3xl">
         <div>
           <h2 class="text-2xl font-bold mb-3">Your "face"</h2>
           <p class="text-xl leading-relaxed">
@@ -24,7 +24,7 @@
           :image="state.face"
           :loading="false"
           loading-text="You don't have an image set up. Go to the Faces page to set one up."
-          class="self-end"
+          class="self-center xl:self-end"
         ></image-widget>
       </div>
     </div>
