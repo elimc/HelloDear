@@ -46,6 +46,11 @@ export default {
       face: "",
     });
 
+    // Get initial state from API
+    fetch("http://127.0.0.1:8000/config").then((resp) =>
+      resp.json().then((json) => (state.value = json))
+    );
+
     // Provide global state so it available in any components if required
     provide("state", state);
 
@@ -54,6 +59,13 @@ export default {
       state,
       (curr, prev) => {
         console.log("State updated", state.value);
+        fetch("http://127.0.0.1:8000/config", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(state.value),
+        }).then((res) => {
+          console.log("State saved", res);
+        });
       },
       { deep: true }
     );
