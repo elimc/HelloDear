@@ -42,7 +42,7 @@ export default {
     // This is not really a good way to manage state,
     // but there's not much time to set up a proper store
     const state = ref({
-      messageID: "test",
+      messageID: "123456789",
       face: "",
     });
 
