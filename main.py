@@ -35,8 +35,9 @@ if __name__ == '__main__':
 
     # Open the database
     with dbm.open("hellodear", "c") as db:
-            config = {str(key, "utf-8"): str(db.get(key), "utf-8") for key in db.keys()}
-    
+        config = {str(key, "utf-8"): str(db.get(key), "utf-8")
+                  for key in db.keys()}
+
     pprint(object=config, indent=4)
 
     # Choose size of pretrained model
@@ -66,6 +67,10 @@ if __name__ == '__main__':
 
     # Grab my ID or return False
     my_id = ui.get_my_info(tg)
+
+    # Print status of program.
+    print()
+    print("Successfully logged in to Telegram! Waiting for messages...")
 
     def new_message_handler(update):
         """
@@ -125,7 +130,8 @@ if __name__ == '__main__':
                 # else:
                 #     print(f'message has been sent: {result.update}')
             else:
-                print('This is not a message from me. Or it is something other than text.')
+                print(
+                    'This is not a message from me. Or it is something other than text.')
 
         else:
             # A smile is a good default for the scammer.
@@ -140,7 +146,6 @@ if __name__ == '__main__':
             result.wait()
             if result.error:
                 print(f'send message error: {result.error_info}')
-
 
     # Set up the new message handler.
     # Set off a script anytime a new message is received.
