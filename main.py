@@ -25,12 +25,19 @@
 # Imports
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
+import dbm
 from pprint import pprint
 from telegram.client import Telegram
 import functions as fn
 import user_info as ui
 
 if __name__ == '__main__':
+
+    # Open the database
+    with dbm.open("hellodear", "c") as db:
+            config = {str(key, "utf-8"): str(db.get(key), "utf-8") for key in db.keys()}
+    
+    pprint(object=config, indent=4)
 
     # Choose size of pretrained model
     MODEL_NAME = "microsoft/DialoGPT-large"
