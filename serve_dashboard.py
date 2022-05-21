@@ -5,6 +5,7 @@ from subprocess import Popen
 from os.path import isdir
 from os import system
 import sys
+import traceback
 
 API_PORT = 8000
 DASHBOARD_PORT = 8080
@@ -23,11 +24,14 @@ if not isdir("dashboard/dist"):
 # Serve API.
 try:
     Popen(f"waitress-serve --port={API_PORT} --host=localhost api.app:app")
-except:
+except:  
     print("Unable to serve API.")
+    print("Did you run `pip install requirements.txt`?")
     print(
         f"Make sure you don't already have something running on http://localhost:{API_PORT}"
     )
+    print("|----- Error Message -----|")
+    traceback.print_exc()
     sys.exit()
 
 # Serve dashboard
