@@ -25,14 +25,14 @@
         "
       />
     </div>
-    <save-button>Save</save-button>
+    <button-widget class="bg-blue-400">Save</button-widget>
   </card-widget>
 </template>
 
 <script>
 import { inject, ref } from "vue";
 import CardWidget from "../components/Card.vue";
-import SaveButton from '../components/SaveButton.vue';
+import ButtonWidget from '../components/Button.vue';
 
 export default {
   name: "Configuration",
@@ -56,6 +56,6 @@ export default {
     };
     return { title, state, fields, submit };
   },
-  components: { CardWidget, SaveButton },
+  components: { CardWidget, ButtonWidget },
 };
 </script>
