@@ -1,6 +1,7 @@
 arrow==1.2.2
 certifi==2022.5.18.1
 charset-normalizer==2.0.12
+falcon==3.1.0
 filelock==3.7.0
 huggingface-hub==0.6.0
 idna==3.3
@@ -9,12 +10,11 @@ packaging==21.3
 pyparsing==3.0.9
 python-dateutil==2.8.2
 python-telegram==0.15.0
-wheel==0.37.1 # needed to build python-telegram on linux
 PyYAML==6.0
 regex==2022.4.24
 requests==2.27.1
-setuptools==62.3.2
 six==1.16.0
+setuptools==62.3.2
 times==0.7
 tokenizers==0.12.1
 torch==1.11.0
@@ -22,6 +22,4 @@ tqdm==4.64.0
 transformers==4.19.2
 typing_extensions==4.2.0
 urllib3==1.26.9
-falcon==3.1.0
 waitress==2.1.1
-
