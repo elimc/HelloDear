@@ -63,7 +63,6 @@ export default {
     const isTabSelected = (tab) => {
       const tabName = String(tab.name).toLowerCase();
       const currName = String(currRoute.name).toLowerCase();
-      console.log(tab.name, currRoute.name);
 
       return tabName == currName;
     };
