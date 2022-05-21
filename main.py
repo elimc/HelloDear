@@ -23,13 +23,24 @@
 
 
 # Imports
+from transformers import AutoModelForCausalLM, AutoTokenizer
+import torch
 from telegram.client import Telegram
 import functions as fn
 import user_info as ui
 
 if __name__ == '__main__':
 
-    output = "pong"
+    # Choose size of pretrained model
+    MODEL_NAME = "microsoft/DialoGPT-large"
+    # MODEL_NAME = "microsoft/DialoGPT-medium"
+    # MODEL_NAME = "microsoft/DialoGPT-small"
+
+    # Set up conversationalai model
+    tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+    model = AutoModelForCausalLM.from_pretrained(MODEL_NAME)
+
+    # For Eli local chat.
     chat_id = 777000
 
     tg = Telegram(
@@ -61,7 +72,28 @@ if __name__ == '__main__':
         sender_user_id = update['message']['sender']['user_id']
         print(f'ID of last message sender: {sender_user_id}')
 
-        if message_content['@type'] == 'messageText' and message_text == 'ping' and sender_user_id == my_id:
+        if message_content['@type'] == 'messageText' and sender_user_id == my_id:
+
+            # encode the input and add end of string token
+            input_ids = tokenizer.encode(
+                message_text + tokenizer.eos_token, return_tensors="pt")
+            # concatenate new user input with chat history (if there is)
+            # bot_input_ids = torch.cat([chat_history_ids, input_ids], dim=-1) if step > 0 else input_ids
+            bot_input_ids = input_ids
+
+            chat_history_ids = model.generate(
+                bot_input_ids,
+                max_length=1000,
+                do_sample=True,
+                top_p=0.95,
+                top_k=0,
+                temperature=0.75,
+                pad_token_id=tokenizer.eos_token_id
+            )
+
+            output = tokenizer.decode(
+                chat_history_ids[:, bot_input_ids.shape[-1]:][0], skip_special_tokens=True)
+            print(f'This is the output: {output}')
 
             # Make the AI seem more human with a delay.
             # fn.delay_response(0, 20)
@@ -69,7 +101,7 @@ if __name__ == '__main__':
             # Send a message to the chat.
             result = tg.send_message(
                 chat_id=chat_id,
-                text='pong',
+                text=output,
             )
 
             result.wait()
@@ -77,6 +109,8 @@ if __name__ == '__main__':
                 print(f'send message error: {result.error_info}')
             # else:
             #     print(f'message has been sent: {result.update}')
+        else:
+            print('This is not a message from me. Or it is something other than text.')
 
     # Set up the new message handler.
     # Set off a script anytime a new message is received.
