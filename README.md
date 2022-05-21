@@ -17,12 +17,14 @@ python3 -m pip --version
 
 For Windows:
 
-Please ensure that you have python3 on your computer. If you are unsure, you can download the most up-to-date version by following the steps at this link: https://docs.python.org/3/using/windows.html#windows-full
+Install [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install), then install [Ubuntu for Windows](https://apps.microsoft.com/store/detail/ubuntu-on-windows/9NBLGGH4MSV6?hl=en-us&gl=US).
 
-```sh
-py -m pip install --upgrade pip
-py -m pip --version
+Once you have that, install pip:
 ```
+sudo easy_install pip
+```
+
+Follow the Mac/Unix steps for creating a virtual environment.
 
 ### Installation of project
 
@@ -40,7 +42,7 @@ pip install -r requirements.txt
 deactivate
 ```
 
-For Windows:
+For Windows (w/o Windows Subsystem for Linux):
 
 ```sh
 py -m pip install --user virtualenv
